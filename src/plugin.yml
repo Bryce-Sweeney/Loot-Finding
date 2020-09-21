@@ -1,0 +1,10 @@
+name: LootPlugin
+main: Main
+version: 0.0.0
+author: CodeConduit
+
+commands:
+  getlootselector:
+    description: Get all the relevant items for the loot plugin.
+    usage: /getlootselector
+    permission: lootFindSelector.use
