@@ -4,6 +4,7 @@ import QuarantineMC.CodeConduit.LootPlugin.Main;
 import QuarantineMC.CodeConduit.LootPlugin.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -30,8 +31,11 @@ public class InteractListener implements Listener {
         ItemStack hand = player.getItemInHand();
         Block block = e.getClickedBlock();
         //Nested if statements
+        player.sendMessage("debug 0");
         if (action.equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (Main.lootSelect.equals(hand)) {
+            player.sendMessage("debug 1");
+            if (Main.lootSelect.equals(hand) && player.hasPermission("lootFindSelector.use")) {
+                player.sendMessage("debug 2");
                 //Do configuration for players
                 plugin.getDataConfig().set("players." + player.getUniqueId() + ".selectedLootBlock", plugin.getDataConfig().getInt("lootBlocks.nextID"));
                 plugin.getDataConfig().set("players." + player.getUniqueId() + ".listeningChat", true);
@@ -43,8 +47,11 @@ public class InteractListener implements Listener {
                 //Do visual effects
                 plugin.getDataConfig().set("players." + player.getUniqueId() + ".savedBlock", block);
                 block.setType(Material.BARREL);
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
                 player.sendMessage(Utils.chat("&6Please state the weight of the chest.&e (-1.0 is always common, 1.0 is always legendary)"));
                 player.sendMessage(Utils.chat("&6If you want to use the default chances, say &edefault&6. If you want to cancel, do &ecancel&e."));
+
+                plugin.saveData(); //Save
             }
         }
     }

@@ -1,6 +1,7 @@
 package QuarantineMC.CodeConduit.LootPlugin;
 
 import QuarantineMC.CodeConduit.LootPlugin.commands.GiveLootSelector;
+import QuarantineMC.CodeConduit.LootPlugin.listeners.ChatListener;
 import QuarantineMC.CodeConduit.LootPlugin.listeners.InteractListener;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -32,6 +33,7 @@ public class Main extends JavaPlugin {
         //Activate Classes
         new GiveLootSelector(this);
         new InteractListener(this);
+        new ChatListener(this);
         //Assign Itemstack Metas
         assignMetas();
     }
@@ -44,7 +46,7 @@ public class Main extends JavaPlugin {
     //Method for item stack meta's
     public void assignMetas() {
         //lootSelect
-        lootSelectMeta.setDisplayName("SelectLootBlock");
+        lootSelectMeta.setDisplayName(Utils.chat("&6&lSelect Loot Block"));
         lootSelectMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
         lootSelectMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lootSelect.setItemMeta(lootSelectMeta);
