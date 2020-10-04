@@ -1,6 +1,8 @@
 package QuarantineMC.CodeConduit.LootPlugin;
 
+import QuarantineMC.CodeConduit.LootPlugin.commands.GiveLootFinder;
 import QuarantineMC.CodeConduit.LootPlugin.commands.GiveLootSelector;
+import QuarantineMC.CodeConduit.LootPlugin.listeners.BreakListener;
 import QuarantineMC.CodeConduit.LootPlugin.listeners.ChatListener;
 import QuarantineMC.CodeConduit.LootPlugin.listeners.InteractListener;
 import org.bukkit.Material;
@@ -19,9 +21,13 @@ public class Main extends JavaPlugin {
     //Variables
     private final File dataFile = new File(getDataFolder(), "data.yml");
     private final FileConfiguration dataConfig = YamlConfiguration.loadConfiguration(dataFile);
+    private final FileConfiguration config = this.getConfig();
 
     public static ItemStack lootSelect = new ItemStack(Material.BLAZE_POWDER);
     public ItemMeta lootSelectMeta = lootSelect.getItemMeta();
+
+    public static ItemStack lootFinder = new ItemStack(Material.WOODEN_SHOVEL);
+    public ItemMeta lootFinderMeta = lootFinder.getItemMeta();
 
     //Executes when plugin is enabled
     public void onEnable() {
@@ -34,13 +40,18 @@ public class Main extends JavaPlugin {
         new GiveLootSelector(this);
         new InteractListener(this);
         new ChatListener(this);
+        new BreakListener(this);
+        new GiveLootFinder(this);
         //Assign Itemstack Metas
         assignMetas();
+        //Load config
+        loadConfig();
     }
 
     //Executed when plugin is disabled
     public void onDisable() {
         saveData();
+        saveConfig();
     }
 
     //Method for item stack meta's
@@ -50,6 +61,12 @@ public class Main extends JavaPlugin {
         lootSelectMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
         lootSelectMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         lootSelect.setItemMeta(lootSelectMeta);
+
+        //lootFinder
+        lootFinderMeta.setDisplayName(Utils.chat("&6&lTreasure Spade"));
+        lootFinderMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+        lootFinderMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        lootFinder.setItemMeta(lootFinderMeta);
     }
 
     //Getters for data
@@ -67,5 +84,10 @@ public class Main extends JavaPlugin {
         } catch (IOException error) {
             error.printStackTrace();
         }
+    }
+
+    //Config Loader
+    public void loadConfig() {
+        getConfig().options().copyDefaults(true);
     }
 }

@@ -1,9 +1,10 @@
-lootFind.use:
+lootPlug.use:
   description: Can use the lootFind plugin.
   default: true
   children:
-    lootFindSelector.use:
-      description: Can use the lootfind selector tool.
+    lootSelector.use:
+      description: Can use the loot selector tool.
       default: op
     lootFinder.use:
-      description: Can use the loot finder.
+      description: Can use the loot finder tool.
+      default: true

@@ -5,6 +5,9 @@ author: CodeConduit
 api-version: 1.16
 
 commands:
-  getlootselector:
-    description: Get all the relevant items for the loot plugin.
-    permission: lootFindSelector.use
+  lootselector:
+    description: Player recieves a loot selector tool.
+    permission: lootSelector.use
+  lootfinder:
+    description: Player recieves a loot finder tool.
+    permission: lootFinder.use

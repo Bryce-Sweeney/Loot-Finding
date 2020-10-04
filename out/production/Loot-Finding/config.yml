@@ -1,0 +1,46 @@
+lootTable:
+  common:
+    chance: 40
+    totalLoot: 2
+    0:
+      item: DIAMOND
+      amount: 2
+    1:
+      item: GOLD_INGOT
+      amount: 2
+  uncommon:
+    chance: 30
+    totalLoot: 2
+    0:
+      item: DIAMOND
+      amount: 5
+    1:
+      item: GOLD_INGOT
+      amount: 5
+  rare:
+    chance: 20
+    totalLoot: 2
+    0:
+      item: DIAMOND
+      amount: 10
+    1:
+      item: GOLD_INGOT
+      amount: 10
+  epic:
+    chance: 15
+    totalLoot: 2
+    0:
+      item: DIAMOND
+      amount: 20
+    1:
+      item: GOLD_INGOT
+      amount: 20
+  legendary:
+    chance: 5
+    totalLoot: 2
+    0:
+      item: DIAMOND
+      amount: 100
+    1:
+      item: GOLD_INGOT
+      amount: 100
